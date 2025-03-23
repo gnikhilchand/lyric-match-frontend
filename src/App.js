@@ -174,7 +174,7 @@ const App = () => {
   const generateLyric = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("http://127.0.0.1:8000/generate-lyric");
+      const response = await axios.post("https://lyric-match-backend.onrender.com");
       setLyricSnippet(response.data.lyric_snippet);
       setCorrectTitle(response.data.correct_title);
       setResult("");
@@ -194,7 +194,7 @@ const App = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post("http://127.0.0.1:8000/check-answer", {
+      const response = await axios.post("https://lyric-match-backend.onrender.com", {
         username: username,
         user_guess: userGuess,
         correct_title: correctTitle,
@@ -220,7 +220,7 @@ const App = () => {
   const fetchLeaderboard = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://127.0.0.1:8000/leaderboard");
+      const response = await axios.get("https://lyric-match-backend.onrender.com");
       setLeaderboard(response.data);
     } catch (error) {
       console.error("Error fetching leaderboard:", error);
