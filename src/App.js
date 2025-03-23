@@ -160,6 +160,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { CircleLoader } from "react-spinners";
 
+const backendUrl = "https://lyric-match-backend.onrender.com";
+
 const App = () => {
   const [lyricSnippet, setLyricSnippet] = useState("");
   const [userGuess, setUserGuess] = useState("");
@@ -174,7 +176,7 @@ const App = () => {
   const generateLyric = async () => {
     setLoading(true);
     try {
-      const response = await axios.post("https://lyric-match-backend.onrender.com");
+      const response = await axios.post(`${backendUrl}/generate-lyric`);
       setLyricSnippet(response.data.lyric_snippet);
       setCorrectTitle(response.data.correct_title);
       setResult("");
@@ -194,7 +196,7 @@ const App = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post("https://lyric-match-backend.onrender.com", {
+      const response = await axios.post(`${backendUrl}/check-answer`, {
         username: username,
         user_guess: userGuess,
         correct_title: correctTitle,
@@ -220,7 +222,7 @@ const App = () => {
   const fetchLeaderboard = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("https://lyric-match-backend.onrender.com");
+      const response = await axios.get(`${backendUrl}/leaderboard`);
       setLeaderboard(response.data);
     } catch (error) {
       console.error("Error fetching leaderboard:", error);
